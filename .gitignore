@@ -1,0 +1,19 @@
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Output directories
+bin/
+obj/
+
+# Dependency files
+go.sum
+vendor/
+
+# Docker files
+docker-compose.override.yml
+
