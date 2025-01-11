@@ -4,11 +4,13 @@ FROM golang:1.20-alpine
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy Go modules and dependencies first (for caching)
-COPY go.mod go.sum ./
+# Copy Go modules and dependencies if they exist
+COPY go.mod ./
+# Check if go.sum exists before copying (avoid breaking the build if missing)
+COPY go.sum ./
 
-# Download all dependencies
-RUN go mod download
+# Download dependencies (if go.mod is available)
+RUN if [ -f go.mod ]; then go mod download; fi
 
 # Copy the rest of the application source code
 COPY . .
